@@ -47,7 +47,7 @@ public class iFundo extends JLayeredPane {
 				/** Peça selecionada (Para pintar o retângulo de azul) */
 				Ponto orig = iTabuleiro.getOrig();
 				
-				if ( orig != null && orig.getX() == i && orig.getY() == (Tabuleiro.getColunas() - 1 ) - j  )
+				if ( orig != null && orig.getX() == i && orig.getY() == ( Tabuleiro.getColunas() - 1 ) - j  )
 						g2d.setPaint(Color.blue);
 				
 				else
