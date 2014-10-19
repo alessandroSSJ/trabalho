@@ -8,7 +8,7 @@ public class iTabThread extends Thread {
 	
 	public iTabThread()
 	{
-		super("Thread da interface do tabuleiro");
+		super("Thread da interface do tabuleir");
 		iTab = new iTabuleiro();
 		iTab.DrawPecas(TabThread.getTabuleiro());
 		iTab.DrawBackground();
