@@ -14,6 +14,7 @@ import java.awt.*      ;
 import java.awt.geom.* ;
 import javax.swing.*   ;
 import engine.*        ;
+import auxiliar.*      ;
 
 public class iFundo extends JLayeredPane {
 	
@@ -43,19 +44,28 @@ public class iFundo extends JLayeredPane {
 				
 				Rectangle2D rt = new Rectangle2D.Double(leftPoint , rightPoint , WIDTH , HEIGHT) ;
 				
-				if ( j % 2 == 0 )
-				{
-					if( i % 2 == 0 )
-						g2d.setPaint(Color.WHITE)  ;
-					else
-						g2d.setPaint(Color.BLACK)  ;
-				}
+				/** Peça selecionada (Para pintar o retângulo de azul) */
+				Ponto orig = iTabuleiro.getOrig();
+				
+				if ( orig != null && orig.getX() == i && orig.getY() == (Tabuleiro.getColunas() - 1 ) - j  )
+						g2d.setPaint(Color.blue);
+				
 				else
 				{
-					if( i % 2 == 0)
-						g2d.setPaint(Color.BLACK);
+					if ( j % 2 == 0 )
+					{
+						if( i % 2 == 0 )
+							g2d.setPaint(Color.WHITE)  ;
+						else
+							g2d.setPaint(Color.BLACK)  ;
+					}
 					else
-						g2d.setPaint(Color.WHITE);
+					{
+						if( i % 2 == 0)
+							g2d.setPaint(Color.BLACK);
+						else
+							g2d.setPaint(Color.WHITE);
+					}
 				}
 					
 				g2d.fill(rt);
