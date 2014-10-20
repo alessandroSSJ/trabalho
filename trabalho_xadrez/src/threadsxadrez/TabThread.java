@@ -56,7 +56,6 @@ public class TabThread extends Thread{
 	/** Metodo run*/
 	@Override public void run()
 	{
-		System.out.printf("Inicializando thread\n");
 		while(true)
 		{
 			Rodada();
