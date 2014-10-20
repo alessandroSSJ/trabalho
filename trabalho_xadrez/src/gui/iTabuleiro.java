@@ -11,10 +11,6 @@ package gui;
 
 import java.awt.* ;
 import java.awt.event.*;
-import java.io.*;
-import java.net.*;
-
-import javax.sound.sampled.*;
 import javax.swing.*;
 
 import engine.*;
@@ -36,15 +32,11 @@ public class iTabuleiro extends JFrame implements MouseListener {
 	/** Variável para determinar se ja é o momento para realizar a jogada*/
 	private static boolean jogadaValida = false;
 	
-	/** Arquivos de som*/
-	private static File mov = new File("Sons/mov.wav");
-	private static Clip clipMov;
-	
 	public iTabuleiro()
 	{
 		super("Jogo de Xadrez, by Marcelo e Alessandro") ;
 		
-		Toolkit tk=Toolkit.getDefaultToolkit();
+		Toolkit tk = Toolkit.getDefaultToolkit();
 		
 		Dimension screenSize=tk.getScreenSize();
 		
@@ -58,25 +50,6 @@ public class iTabuleiro extends JFrame implements MouseListener {
 		setResizable(false);
 		
 		addMouseListener( (MouseListener) this);
-		
-		AudioInputStream stream;
-	    AudioFormat format;
-	    DataLine.Info info;
-	    
-
-	    try
-	    {
-	    	/** Som da movimentação das peças */
-		    stream = AudioSystem.getAudioInputStream(mov);
-		    format = stream.getFormat();
-		    info = new DataLine.Info(Clip.class, format);
-		    clipMov = (Clip) AudioSystem.getLine(info);
-		    clipMov.open(stream);
-	    }
-	    catch(Exception e)
-	    {
-	    	e.printStackTrace();
-	    }
 	}
 	
 	/** Desenha o LayeredPane do fundo */
@@ -89,7 +62,6 @@ public class iTabuleiro extends JFrame implements MouseListener {
 	}
 	
 	/** Desenha o LayeredPane das peças */
-	
 	public void DrawPecas(Tabuleiro tab)
 	{
 		iPeca p = new iPeca(tab) ;
@@ -121,7 +93,7 @@ public class iTabuleiro extends JFrame implements MouseListener {
 		return iTabuleiro.ptDest;
 	}
 	
-	/** Retorna se jogada é válida*/
+	/** Retorna se jogada é válida */
 	public static boolean getJogadaValida()
 	{
 		return iTabuleiro.jogadaValida;
@@ -156,7 +128,6 @@ public class iTabuleiro extends JFrame implements MouseListener {
 		{
 		    ptDest = new Ponto(xi , yi ) ;
 		    setJogadaValida(true);
-		    clipMov.loop(1);
 		}
 	}
 	

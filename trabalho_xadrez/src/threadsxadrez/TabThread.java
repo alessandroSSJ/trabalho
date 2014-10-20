@@ -1,5 +1,9 @@
 package threadsxadrez;
 
+import java.io.*;
+
+import javax.sound.sampled.*;
+
 import auxiliar.*;
 import engine.*;
 import gui.*;
@@ -8,15 +12,39 @@ public class TabThread extends Thread{
 	
 	public static Tabuleiro tab = null;
 	
+	/** Arquivos de som*/
+	private static File mov = new File("Sons/mov.wav");
+	private static Clip clipMov;
+	
 	public TabThread()
 	{
 		super("Thread do tabuleiro");
 		tab = new Tabuleiro();
+		
+		AudioInputStream stream;
+	    AudioFormat format;
+	    DataLine.Info info;
+
+	    try
+	    {
+	    	/** Som da movimentação das peças */
+		    stream = AudioSystem.getAudioInputStream(mov);
+		    format = stream.getFormat();
+		    info = new DataLine.Info(Clip.class, format);
+		    clipMov = (Clip) AudioSystem.getLine(info);
+		    clipMov.open(stream);
+	    }
+	    catch(Exception e)
+	    {
+	    	e.printStackTrace();
+	    }
 	}
 	
 	/** Faz uma jogada no tabuleiro */
 	public void Rodada()
 	{
+		
+		/* Uma rodada normal */
 		
 		if ( !iTabuleiro.getJogadaValida() )
 			return;
@@ -32,9 +60,16 @@ public class TabThread extends Thread{
 			if ( pecaOrigem.ChecaMovimentoPeca(ptDest.getX(), ptDest.getY() ) == true)
 			{
 				if( pecaDestino == null )
+				{
 					tab.ChangePeca(ptOrig.getY() , ptOrig.getX() , ptDest.getY() , ptDest.getX() ) ;
-				else
-					System.out.printf("Peca Destino nao null\n");
+					clipMov.loop(1);
+				}
+				else if ( pecaOrigem.getLado() != pecaDestino.getLado() )
+				{
+					tab.ComePeca(ptDest.getY(), ptDest.getX());
+					tab.ChangePeca(ptOrig.getY() , ptOrig.getX() , ptDest.getY() , ptDest.getX() ) ;
+					clipMov.loop(1);
+				}
 			}
 			else
 				System.out.printf("Jogada não pode ser realizada\n") ;
@@ -43,8 +78,9 @@ public class TabThread extends Thread{
 			System.out.printf("Peca origem null\n");
 		
 		iTabuleiro.setJogadaValida(false);
-		
 		iTabuleiro.ZerarRodada();	
+		
+		/* *********************************************** */
 	}
 	
 	/** get Tabuleiro */

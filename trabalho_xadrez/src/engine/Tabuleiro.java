@@ -87,6 +87,12 @@ public class Tabuleiro {
 		pecas[linhaO][colunaO] = temp;
 	}
 	
+	/** Retira uma peca do tabuleiro*/
+	public void ComePeca(int linha, int coluna)
+	{
+		pecas[linha][coluna] = null;
+	}
+	
 	/** Retorna o número de linhas do tabuleiro */
 	public static int getLinhas()
 	{
