@@ -1,3 +1,4 @@
+
 /**
  * Classe principal que instanciará todas as threads
  * necessárias para o funcionamento do jodo de xadrez.
@@ -9,12 +10,6 @@
 
 
 import threadsxadrez.*;
-
-import gui.*;
-
-import java.util.*;
-
-@SuppressWarnings("unused")
 
 public class Principal {
 

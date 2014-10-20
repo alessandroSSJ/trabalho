@@ -11,7 +11,10 @@ package gui;
 
 import java.awt.* ;
 import java.awt.event.*;
+import java.io.*;
+import java.net.*;
 
+import javax.sound.sampled.*;
 import javax.swing.*;
 
 import engine.*;
@@ -33,6 +36,10 @@ public class iTabuleiro extends JFrame implements MouseListener {
 	/** Variável para determinar se ja é o momento para realizar a jogada*/
 	private static boolean jogadaValida = false;
 	
+	/** Arquivos de som*/
+	private static File mov = new File("Sons/mov.wav");
+	private static Clip clipMov;
+	
 	public iTabuleiro()
 	{
 		super("Jogo de Xadrez, by Marcelo e Alessandro") ;
@@ -44,13 +51,32 @@ public class iTabuleiro extends JFrame implements MouseListener {
 		int x = screenSize.width/2 - WIDTH/2   ;
 		int y = screenSize.height/2 - HEIGHT/2 ;
 		
-		setBounds(x,y,WIDTH,HEIGHT); /*Posiciona o tabuleiro no meio da tela do monitor*/
+		setBounds(x,y,WIDTH,HEIGHT); /* Posiciona o tabuleiro no meio da tela do monitor */
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		setResizable(false);
 		
 		addMouseListener( (MouseListener) this);
+		
+		AudioInputStream stream;
+	    AudioFormat format;
+	    DataLine.Info info;
+	    
+
+	    try
+	    {
+	    	/** Som da movimentação das peças */
+		    stream = AudioSystem.getAudioInputStream(mov);
+		    format = stream.getFormat();
+		    info = new DataLine.Info(Clip.class, format);
+		    clipMov = (Clip) AudioSystem.getLine(info);
+		    clipMov.open(stream);
+	    }
+	    catch(Exception e)
+	    {
+	    	e.printStackTrace();
+	    }
 	}
 	
 	/** Desenha o LayeredPane do fundo */
@@ -130,6 +156,7 @@ public class iTabuleiro extends JFrame implements MouseListener {
 		{
 		    ptDest = new Ponto(xi , yi ) ;
 		    setJogadaValida(true);
+		    clipMov.loop(1);
 		}
 	}
 	
