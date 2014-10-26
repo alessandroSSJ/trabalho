@@ -21,8 +21,8 @@ public class iFundo extends JLayeredPane {
 	private static final long serialVersionUID = 1L;
 	
 	/** Dimensões de um retângulo de xadrez */
-	private static final int HEIGHT = 80  ;
-	private static final int WIDTH = 80   ;
+	private static final int HEIGHT = 100  ;
+	private static final int WIDTH = 100   ;
 	
 	/** Overriding na classe paintComponent */
 	@Override public void paintComponent(Graphics g)
