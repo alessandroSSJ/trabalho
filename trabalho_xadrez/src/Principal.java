@@ -18,6 +18,8 @@ public class Principal {
 		TabThread tab = new TabThread();
 		iTabThread iTab = new iTabThread() ;
 
+		/* Inicializando as threads */
+		
 		tab.start();
 		iTab.start();
 		

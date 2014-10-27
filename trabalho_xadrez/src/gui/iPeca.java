@@ -36,6 +36,9 @@ public class iPeca extends JLayeredPane {
 		int j;
 		int imWidth = 40 ;
 		int imHeight = imWidth ;
+		
+		/* Offsets para centralizar as peças */
+		
 		int offsetWidth = iFundo.getLargura()/2 - imWidth/2 ;
 		int offsetHeight = 8*iFundo.getAltura()-iFundo.getAltura()/2 - imHeight/2;
 		
@@ -47,6 +50,9 @@ public class iPeca extends JLayeredPane {
 				if ( p != null ) /* null significa que não tem peça nenhuma naquela posição */
 				{
 					Image imPeca = null;
+					
+					/* Associa o tipo da peça ao arquivo que contem sua imagem */
+
 					String filename = "Pecas/" + p.getLado() + "_" + p.getTipo() + ".gif" ;
 					
 					try
@@ -55,9 +61,6 @@ public class iPeca extends JLayeredPane {
 					}
 					catch(IOException e)
 					{
-						System.out.print("Tentei ler : " ) ;
-						System.out.println(filename) ;
-						
 						System.out.println(e.getMessage());
 						return ;
 					}

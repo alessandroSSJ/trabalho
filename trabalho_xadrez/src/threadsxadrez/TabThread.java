@@ -55,6 +55,8 @@ public class TabThread extends Thread{
 		Peca pecaOrigem = tab.getPeca( ptOrig.getY() , ptOrig.getX() ) ;
 		Peca pecaDestino = tab.getPeca( ptDest.getY() , ptDest.getX() );
 		
+		/* Falta tratar melhor utilizando o try catch (FICARÁ PARA DEPOIS DO MARCO 1) */
+		
 		if ( pecaOrigem != null )
 		{	
 			if ( pecaOrigem.ChecaMovimentoPeca(ptDest.getX(), ptDest.getY() ) == true)
