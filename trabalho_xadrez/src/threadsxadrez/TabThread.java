@@ -1,3 +1,13 @@
+/**
+ * Classe responsável por implementar a thread que irá lidar
+ * com a parte funcional do jogo, isto é, organizará o mesmo
+ * em rodadas, atribuirá vitórias, derrotas e etc.
+ * 
+ * @version 1.0
+ * @author Alessandro e Marcelo
+ * @since 1.0
+ */
+
 package threadsxadrez;
 
 import java.io.*;

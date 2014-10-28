@@ -1,3 +1,12 @@
+/**
+ * Classe responsável por implementar a thread que irá lidar
+ * com a parte gráfica do jogo.
+ * 
+ * @version 1.0
+ * @author Alessandro e Marcelo
+ * @since 1.0
+ */
+
 package threadsxadrez;
 
 import gui.*;

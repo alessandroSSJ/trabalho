@@ -1,4 +1,3 @@
-
 /**
  * Classe principal que instanciará todas as threads
  * necessárias para o funcionamento do jodo de xadrez.
