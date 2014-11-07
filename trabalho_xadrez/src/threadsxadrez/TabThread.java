@@ -17,6 +17,7 @@ import javax.sound.sampled.*;
 import auxiliar.*;
 import engine.*;
 import gui.*;
+import Exceptions.*;
 
 public class TabThread extends Thread{
 	
@@ -37,7 +38,7 @@ public class TabThread extends Thread{
 
 	    try
 	    {
-	    	/** Som da movimentação das peças */
+	    	/** Som da movimentacao das peças */
 		    stream = AudioSystem.getAudioInputStream(mov);
 		    format = stream.getFormat();
 		    info = new DataLine.Info(Clip.class, format);
@@ -65,8 +66,34 @@ public class TabThread extends Thread{
 		Peca pecaOrigem = tab.getPeca( ptOrig.getY() , ptOrig.getX() ) ;
 		Peca pecaDestino = tab.getPeca( ptDest.getY() , ptDest.getX() );
 		
-		/* Falta tratar melhor utilizando o try catch (FICARÁ PARA DEPOIS DO MARCO 1) */
+		/* Falta tratar melhor utilizando o try catch (FICARAO PARA DEPOIS DO MARCO 1) */
+		try{
+			if(pecaOrigem==null)
+				throw new OrigemSemPeca();
+			else if(pecaOrigem.ChecaMovimentoPeca(ptDest.getX(), ptDest.getY() ) == false)
+				throw new MovimentoInvalido();
+			else if( pecaDestino == null )
+			{
+				tab.ChangePeca(ptOrig.getY() , ptOrig.getX() , ptDest.getY() , ptDest.getX() ) ;
+				clipMov.loop(1);
+			}
+			else if ( pecaOrigem.getLado() != pecaDestino.getLado() )
+			{
+				tab.ComePeca(ptDest.getY(), ptDest.getX());
+				tab.ChangePeca(ptOrig.getY() , ptOrig.getX() , ptDest.getY() , ptDest.getX() ) ;
+				clipMov.loop(1);
+			}
+		}
+		catch(OrigemSemPeca osp)
+		{
+			System.out.printf("Peca origem null\n");
+		}
+		catch(MovimentoInvalido mi)
+		{
+			System.out.printf("Jogada n�o pode ser realizada\n") ;
+		}
 		
+		/*
 		if ( pecaOrigem != null )
 		{	
 			if ( pecaOrigem.ChecaMovimentoPeca(ptDest.getX(), ptDest.getY() ) == true)
@@ -84,10 +111,11 @@ public class TabThread extends Thread{
 				}
 			}
 			else
-				System.out.printf("Jogada não pode ser realizada\n") ;
+				System.out.printf("Jogada nao pode ser realizada\n") ;
 		}
 		else
 			System.out.printf("Peca origem null\n");
+		*/
 		
 		iTabuleiro.setJogadaValida(false);
 		iTabuleiro.ZerarRodada();	
